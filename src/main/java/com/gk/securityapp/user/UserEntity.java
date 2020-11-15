@@ -1,20 +1,20 @@
 package com.gk.securityapp.user;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "users", schema = "public")
 @Setter(AccessLevel.PACKAGE)
 @Getter
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = UserEntity.UserEntityBuilder.class)
+@Jacksonized
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,9 +32,9 @@ public class UserEntity {
 
     @ElementCollection
     @CollectionTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role_id")
+    @Column(name = "role_name")
     @Singular
-    Set<Integer> roles;
+    List<String> roles;
 
     @CreatedDate
     @Column(name = "created_date", updatable = false)

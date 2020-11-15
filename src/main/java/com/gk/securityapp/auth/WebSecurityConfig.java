@@ -1,6 +1,5 @@
 package com.gk.securityapp.auth;
 
-import com.gk.securityapp.auth.service.EagerUserDetailsService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @NonNull PasswordEncoder passwordEncoder;
-    @NonNull EagerUserDetailsService userDetailsService;
+    @NonNull CustomUserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

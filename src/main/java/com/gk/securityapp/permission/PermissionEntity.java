@@ -1,23 +1,19 @@
 package com.gk.securityapp.permission;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "permissions", schema = "public")
 @Setter(AccessLevel.PACKAGE)
 @Getter
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = PermissionEntity.PermissionEntityBuilder.class)
+@Jacksonized
 public class PermissionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    Integer id;
-
     @Column(name = "name", unique = true, updatable = false, nullable = false)
     String name;
 
@@ -28,8 +24,8 @@ public class PermissionEntity {
     boolean enabled;
 
     @ElementCollection
-    @CollectionTable(name = "roles_permissions", joinColumns = @JoinColumn(name = "permission_id"))
-    @Column(name = "role_id")
+    @CollectionTable(name = "roles_permissions", joinColumns = @JoinColumn(name = "permission_name"))
+    @Column(name = "role_name")
     @Singular
-    Set<Integer> roles;
+    List<String> roles;
 }
