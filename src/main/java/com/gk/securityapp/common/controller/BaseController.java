@@ -13,7 +13,7 @@ public abstract class BaseController<D, ID> {
         return ResponseEntity.ok(getService().create(body));
     }
 
-    public ResponseEntity<D> update(ID id, D body) {
+    public ResponseEntity<D> upsert(ID id, D body) {
         return ResponseEntity.ok(getService().update(id, body));
     }
 

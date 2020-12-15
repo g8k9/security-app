@@ -1,4 +1,4 @@
-package com.gk.securityapp.role.service;
+package com.gk.securityapp.role.services;
 
 import com.gk.securityapp.common.service.BaseService;
 import com.gk.securityapp.role.RoleDTO;

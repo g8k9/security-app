@@ -1,4 +1,4 @@
-package com.gk.securityapp.permission.service;
+package com.gk.securityapp.permission.services;
 
 import com.gk.securityapp.common.service.BaseService;
 import com.gk.securityapp.permission.PermissionDTO;

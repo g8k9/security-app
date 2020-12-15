@@ -1,7 +1,7 @@
 package com.gk.securityapp.role;
 
 import com.gk.securityapp.common.controller.BaseController;
-import com.gk.securityapp.role.service.RoleService;
+import com.gk.securityapp.role.services.RoleService;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -44,8 +44,8 @@ public class RoleController extends BaseController<RoleDTO, Integer> {
 
     @Override
     @PutMapping("/{id}")
-    public ResponseEntity<RoleDTO> update(@PathVariable Integer id, @RequestBody RoleDTO body) {
-        return super.update(id, body);
+    public ResponseEntity<RoleDTO> upsert(@PathVariable Integer id, @RequestBody RoleDTO body) {
+        return super.upsert(id, body);
     }
 
     @Override

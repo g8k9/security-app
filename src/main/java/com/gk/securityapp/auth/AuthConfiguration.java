@@ -1,50 +1,47 @@
 package com.gk.securityapp.auth;
 
-import com.gk.securityapp.common.config.SecurityProperties;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
-import java.security.KeyPair;
+import javax.sql.DataSource;
 
 @Configuration
-@EnableConfigurationProperties(SecurityProperties.class)
 @RequiredArgsConstructor
 public class AuthConfiguration {
-    @NonNull SecurityProperties securityProperties;
 
     @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter(){
+    public JwtAccessTokenConverter jwtAccessTokenConverter(@Value("${server.ssl.key-store}") Resource keyStore,
+                                                           @Value("${server.ssl.key-store-password}")
+                                                                   String keyStorePassword,
+                                                           @Value("${server.ssl.key-alias}") String keyAlias) {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        SecurityProperties.JwtProperties jwtProperties = securityProperties.getJwt();
-        KeyPair keyPair = keyPair(jwtProperties,keyStoreKeyFactory(jwtProperties));
-        converter.setKeyPair(keyPair);
+        converter.setKeyPair(new KeyStoreKeyFactory(keyStore, keyStorePassword.toCharArray()).getKeyPair(keyAlias));
         return converter;
     }
 
-    private KeyPair keyPair(SecurityProperties.JwtProperties jwtProperties, KeyStoreKeyFactory keyStoreKeyFactory){
-        return keyStoreKeyFactory.getKeyPair(jwtProperties.getKeyPairAlias(), jwtProperties.getKeyPairPassword().toCharArray());
-    }
-
-    private KeyStoreKeyFactory keyStoreKeyFactory(SecurityProperties.JwtProperties jwtProperties){
-        return new KeyStoreKeyFactory(jwtProperties.getKeyStore(), jwtProperties.getKeyStorePassword().toCharArray());
-    }
-
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public TokenStore tokenStore(JwtAccessTokenConverter jwtAccessTokenConverter){
+    public TokenStore tokenStore(JwtAccessTokenConverter jwtAccessTokenConverter) {
         return new JwtTokenStore(jwtAccessTokenConverter);
+    }
+
+    @Bean
+    public ClientDetailsService clientDetailsService(DataSource dataSource) {
+        return new JdbcClientDetailsService(dataSource);
     }
 }

@@ -1,8 +1,8 @@
-package com.gk.securityapp.role;
+package com.gk.securityapp.role.mappers;
 
 import com.gk.securityapp.common.mapper.BaseMapper;
-import org.mapstruct.Mapper;
+import com.gk.securityapp.role.RoleDTO;
+import com.gk.securityapp.role.RoleEntity;
 
-@Mapper(componentModel = "spring")
 public interface RoleMapper extends BaseMapper<RoleDTO, RoleEntity> {
 }

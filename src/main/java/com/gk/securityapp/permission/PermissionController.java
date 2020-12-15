@@ -1,7 +1,7 @@
 package com.gk.securityapp.permission;
 
 import com.gk.securityapp.common.controller.BaseController;
-import com.gk.securityapp.permission.service.PermissionService;
+import com.gk.securityapp.permission.services.PermissionService;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -42,8 +42,8 @@ public class PermissionController extends BaseController<PermissionDTO, Integer>
 
     @Override
     @PutMapping("/{id}")
-    public ResponseEntity<PermissionDTO> update(@PathVariable Integer id, @RequestBody PermissionDTO body) {
-        return super.update(id, body);
+    public ResponseEntity<PermissionDTO> upsert(@PathVariable Integer id, @RequestBody PermissionDTO body) {
+        return super.upsert(id, body);
     }
 
     @Override

@@ -2,10 +2,7 @@ package com.gk.securityapp.client.entities;
 
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -17,7 +14,7 @@ public class OauthRefreshTokenEntity {
     private byte[] token;
     private byte[] authentication;
 
-    @Basic
+    @Id
     @Column(name = "token_id")
     public String getTokenId() {
         return tokenId;

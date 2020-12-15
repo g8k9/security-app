@@ -2,10 +2,7 @@ package com.gk.securityapp.client.entities;
 
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -16,7 +13,7 @@ public class OauthCodeEntity {
     private String code;
     private byte[] authentication;
 
-    @Basic
+    @Id
     @Column(name = "code")
     public String getCode() {
         return code;

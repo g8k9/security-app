@@ -15,7 +15,6 @@ import java.util.Optional;
 public class PasswordMapper {
     @NonNull PasswordEncoder passwordEncoder;
 
-    @EncodedMapping
     public String encode(String password){
         return Optional.ofNullable(password).map(passwordEncoder::encode).orElse(null);
     }

@@ -1,6 +1,9 @@
 package com.gk.securityapp.user;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Singular;
 import lombok.extern.jackson.Jacksonized;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -11,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users", schema = "public")
-@Setter(AccessLevel.PACKAGE)
+@Setter
 @Getter
 @Builder(toBuilder = true)
 @Jacksonized
