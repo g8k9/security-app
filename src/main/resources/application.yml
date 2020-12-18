@@ -17,3 +17,7 @@ spring:
     username: admin
     password: password
     url: jdbc:postgresql://localhost:5432/security_app
+logging:
+  level:
+    root: DEBUG
+

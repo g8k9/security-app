@@ -1,10 +1,9 @@
 package com.gk.securityapp.user;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Singular;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
+import org.hibernate.annotations.Immutable;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -14,8 +13,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "users", schema = "public")
-@Setter
+@FieldDefaults(makeFinal = false)
 @Getter
+@Setter(AccessLevel.PROTECTED)
+@Immutable
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder(toBuilder = true)
 @Jacksonized
 public class UserEntity {
@@ -33,7 +36,7 @@ public class UserEntity {
     @Column(name = "enabled", nullable = false)
     boolean enabled;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role_name")
     @Singular

@@ -1,6 +1,7 @@
 package com.gk.securityapp.permission;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 
 import javax.persistence.*;
@@ -8,7 +9,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "permissions", schema = "public")
-@Setter(AccessLevel.PACKAGE)
+@FieldDefaults(makeFinal = false)
+@Setter(AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Builder(toBuilder = true)
 @Jacksonized

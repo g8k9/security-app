@@ -1,6 +1,7 @@
 package com.gk.securityapp.role;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 
 import javax.persistence.*;
@@ -8,7 +9,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "roles", schema = "public")
-@Setter(AccessLevel.PACKAGE)
+@FieldDefaults(makeFinal = false)
+@Setter(AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Builder(toBuilder = true)
 @Jacksonized
@@ -23,7 +27,7 @@ public class RoleEntity {
     @Column(name = "enabled", nullable = false)
     boolean enabled;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles_permissions", joinColumns = @JoinColumn(name = "role_name"))
     @Column(name = "permission_name")
     @Singular
