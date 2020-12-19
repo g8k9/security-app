@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
@@ -28,8 +27,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @NonNull PermissionRepository permissionRepository;
 
-    @NonNull PasswordEncoder passwordEncoder;
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByUsername(username);
@@ -38,7 +35,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         return User.builder()
                 .username(username)
                 .password(userEntity.getPassword())
-                .passwordEncoder(passwordEncoder::encode)
                 .authorities(permissionRepository.findAllByRolesIn(roleRepository.findAllByNameIn(userEntity.getRoles())
                         .stream()
                         .map(RoleEntity::getName)
