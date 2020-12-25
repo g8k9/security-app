@@ -8,7 +8,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "permissions", schema = "public")
+@Table(name = "permissions", schema = "public", uniqueConstraints = @UniqueConstraint(columnNames = {
+        "name", "client_id"
+}))
 @FieldDefaults(makeFinal = false)
 @Setter(AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,11 +20,16 @@ import java.util.List;
 @Jacksonized
 public class PermissionEntity {
     @Id
-    @Column(name = "name", unique = true, updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
+    int id;
+
+    @Column(name = "name", updatable = false, nullable = false)
     String name;
 
-    @Column(name = "title", nullable = false)
-    String title;
+    @Column(name = "client_id", updatable = false, nullable = false)
+    String clientId;
+
 
     @Column(name = "enabled", nullable = false)
     boolean enabled;

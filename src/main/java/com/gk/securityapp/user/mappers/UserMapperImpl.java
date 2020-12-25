@@ -1,6 +1,6 @@
 package com.gk.securityapp.user.mappers;
 
-import com.gk.securityapp.common.mapper.DateMapper;
+import com.gk.securityapp.common.mappers.DateMapper;
 import com.gk.securityapp.user.UserEntity;
 import com.gk.securityapp.user.dto.CreateUserRequest;
 import com.gk.securityapp.user.dto.UserDTO;

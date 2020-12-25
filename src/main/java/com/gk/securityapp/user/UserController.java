@@ -46,7 +46,7 @@ public class UserController extends BaseController<UserDTO, Integer> {
     @Override
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> upsert(@PathVariable Integer id, @RequestBody UserDTO body) {
-        return super.upsert(id, body);
+        return super.upsert(id, body.toBuilder().id(id).build());
     }
 
     @Override

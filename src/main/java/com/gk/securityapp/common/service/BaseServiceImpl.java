@@ -1,6 +1,6 @@
 package com.gk.securityapp.common.service;
 
-import com.gk.securityapp.common.mapper.BaseMapper;
+import com.gk.securityapp.common.mappers.BaseMapper;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public abstract class BaseServiceImpl<D, ID, E> implements BaseService<D, ID> {
     }
 
     @Override
-    public D update(ID id, D body) {
+    public D upsert(ID id, D body) {
         return this.saveFlow().apply(body);
     }
 

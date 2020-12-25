@@ -43,7 +43,7 @@ public class PermissionController extends BaseController<PermissionDTO, Integer>
     @Override
     @PutMapping("/{id}")
     public ResponseEntity<PermissionDTO> upsert(@PathVariable Integer id, @RequestBody PermissionDTO body) {
-        return super.upsert(id, body);
+        return super.upsert(id, body.toBuilder().id(id).build());
     }
 
     @Override

@@ -11,8 +11,9 @@ import java.util.List;
 @Builder(toBuilder = true)
 @Jacksonized
 public class PermissionDTO {
+    int id;
     String name;
-    String title;
+    String clientId;
     boolean enabled;
     @Singular
     List<String> roles;

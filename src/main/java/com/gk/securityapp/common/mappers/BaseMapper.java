@@ -1,4 +1,4 @@
-package com.gk.securityapp.common.mapper;
+package com.gk.securityapp.common.mappers;
 
 public interface BaseMapper<D, E> {
     D toDto(E entity);

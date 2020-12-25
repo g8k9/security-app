@@ -12,8 +12,8 @@ public class RoleMapperImpl implements RoleMapper {
     public RoleDTO toDto(RoleEntity roleEntity) {
         return Optional.ofNullable(roleEntity)
                 .map(entity -> RoleDTO.builder()
+                        .id(entity.getId())
                         .name(entity.getName())
-                        .title(entity.getTitle())
                         .enabled(entity.isEnabled())
                         .permissions(entity.getPermissions())
                         .users(entity.getUsers())
@@ -25,10 +25,11 @@ public class RoleMapperImpl implements RoleMapper {
     public RoleEntity toEntity(RoleDTO roleDTO) {
         return Optional.ofNullable(roleDTO)
                 .map(dto -> RoleEntity.builder()
+                        .id(dto.getId())
                         .name(dto.getName())
-                        .title(dto.getTitle())
                         .enabled(dto.isEnabled())
                         .permissions(dto.getPermissions())
+                        .clientId(dto.getClientId())
                         .users(dto.getUsers())
                         .build())
                 .orElse(null);

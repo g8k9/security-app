@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "roles", schema = "public")
+@Table(name = "roles", schema = "public", uniqueConstraints = @UniqueConstraint(columnNames = {"name", "client_id"}))
 @FieldDefaults(makeFinal = false)
 @Setter(AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,14 +18,18 @@ import java.util.List;
 @Jacksonized
 public class RoleEntity {
     @Id
-    @Column(name = "name")
-    String name;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
+    int id;
 
-    @Column(name = "title", nullable = false)
-    String title;
+    @Column(name = "name", updatable = false, nullable = false)
+    String name;
 
     @Column(name = "enabled", nullable = false)
     boolean enabled;
+
+    @Column(name = "client_id", updatable = false, nullable = false)
+    String clientId;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles_permissions", joinColumns = @JoinColumn(name = "role_name"))

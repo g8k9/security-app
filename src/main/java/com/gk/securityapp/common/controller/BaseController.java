@@ -14,7 +14,7 @@ public abstract class BaseController<D, ID> {
     }
 
     public ResponseEntity<D> upsert(ID id, D body) {
-        return ResponseEntity.ok(getService().update(id, body));
+        return ResponseEntity.ok(getService().upsert(id, body));
     }
 
     public ResponseEntity<Void> delete(ID id) {

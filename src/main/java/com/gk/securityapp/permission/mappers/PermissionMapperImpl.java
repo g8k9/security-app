@@ -12,8 +12,9 @@ public class PermissionMapperImpl implements PermissionMapper {
     public PermissionDTO toDto(PermissionEntity permissionEntity) {
         return Optional.ofNullable(permissionEntity)
                 .map(entity -> PermissionDTO.builder()
+                        .id(entity.getId())
                         .name(entity.getName())
-                        .title(entity.getTitle())
+                        .clientId(entity.getClientId())
                         .enabled(entity.isEnabled())
                         .roles(entity.getRoles())
                         .build())
@@ -24,8 +25,9 @@ public class PermissionMapperImpl implements PermissionMapper {
     public PermissionEntity toEntity(PermissionDTO permissionDTO) {
         return Optional.ofNullable(permissionDTO)
                 .map(dto -> PermissionEntity.builder()
+                        .id(dto.getId())
                         .name(dto.getName())
-                        .title(dto.getTitle())
+                        .clientId(dto.getClientId())
                         .enabled(dto.isEnabled())
                         .roles(dto.getRoles())
                         .build())

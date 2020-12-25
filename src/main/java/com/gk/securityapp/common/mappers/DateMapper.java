@@ -1,4 +1,4 @@
-package com.gk.securityapp.common.mapper;
+package com.gk.securityapp.common.mappers;
 
 import org.springframework.stereotype.Component;
 

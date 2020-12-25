@@ -14,7 +14,6 @@ import java.util.List;
 import static lombok.AccessLevel.PROTECTED;
 
 @RestController
-@RequestMapping("/roles")
 @Slf4j
 @RequiredArgsConstructor
 public class RoleController extends BaseController<RoleDTO, Integer> {
@@ -24,33 +23,43 @@ public class RoleController extends BaseController<RoleDTO, Integer> {
     RoleService service;
 
     @Override
-    @PostMapping
+    @PostMapping("/roles")
     public ResponseEntity<RoleDTO> create(@RequestBody RoleDTO body) {
         return super.create(body);
     }
 
     @Override
-    @GetMapping("/")
+    @GetMapping("/roles")
     public ResponseEntity<List<RoleDTO>> getAll() {
         return super.getAll();
     }
 
     @Override
-    @GetMapping("/{id}")
+    @GetMapping("/roles/{id}")
     public ResponseEntity<RoleDTO> getById(@PathVariable Integer id) {
         return super.getById(id);
     }
 
 
     @Override
-    @PutMapping("/{id}")
+    @PutMapping("/roles/{id}")
     public ResponseEntity<RoleDTO> upsert(@PathVariable Integer id, @RequestBody RoleDTO body) {
-        return super.upsert(id, body);
+        return super.upsert(id, body.toBuilder().id(id).build());
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/roles/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         return super.delete(id);
+    }
+
+    @GetMapping("/clients/{clientId}/roles")
+    public ResponseEntity<List<RoleDTO>> getAllByClient(@PathVariable String clientId) {
+        return null;
+    }
+
+    @GetMapping("/clients/{clientId}/roles/{id}")
+    public ResponseEntity<RoleDTO> getInClientById(@PathVariable String clientId, @PathVariable Integer id) {
+        return null;
     }
 }
