@@ -29,7 +29,6 @@ public class RoleMapperImpl implements RoleMapper {
                         .name(dto.getName())
                         .enabled(dto.isEnabled())
                         .permissions(dto.getPermissions())
-                        .clientId(dto.getClientId())
                         .users(dto.getUsers())
                         .build())
                 .orElse(null);

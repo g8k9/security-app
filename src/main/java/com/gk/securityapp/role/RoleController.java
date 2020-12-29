@@ -52,14 +52,4 @@ public class RoleController extends BaseController<RoleDTO, Integer> {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         return super.delete(id);
     }
-
-    @GetMapping("/clients/{clientId}/roles")
-    public ResponseEntity<List<RoleDTO>> getAllByClient(@PathVariable String clientId) {
-        return null;
-    }
-
-    @GetMapping("/clients/{clientId}/roles/{id}")
-    public ResponseEntity<RoleDTO> getInClientById(@PathVariable String clientId, @PathVariable Integer id) {
-        return null;
-    }
 }

@@ -27,10 +27,6 @@ public class PermissionEntity {
     @Column(name = "name", updatable = false, nullable = false)
     String name;
 
-    @Column(name = "client_id", updatable = false, nullable = false)
-    String clientId;
-
-
     @Column(name = "enabled", nullable = false)
     boolean enabled;
 

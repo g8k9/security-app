@@ -13,7 +13,6 @@ import java.util.List;
 public class PermissionDTO {
     int id;
     String name;
-    String clientId;
     boolean enabled;
     @Singular
     List<String> roles;

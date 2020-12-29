@@ -28,9 +28,6 @@ public class RoleEntity {
     @Column(name = "enabled", nullable = false)
     boolean enabled;
 
-    @Column(name = "client_id", updatable = false, nullable = false)
-    String clientId;
-
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles_permissions", joinColumns = @JoinColumn(name = "role_name"))
     @Column(name = "permission_name")
